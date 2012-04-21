@@ -1,5 +1,7 @@
 #NoEnv
 
+#Include Classifier.ahk
+
 c := new Classifier
 
 c.Train("Nobody owns the water.","good")
