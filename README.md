@@ -1,5 +1,5 @@
-Fisher-Classifier
-=================
+Classifier
+==========
 A document filtering class implementing a Fisher classifier.
 
 A Fisher classifier is similar to a naive Bayesian classifier, but it is known to give significantly more accurate results in many cases.
@@ -37,7 +37,7 @@ First, we need to create a classifier:
 
 Now, the classifier needs to be trained to recognize the types of posts we are looking for. Specifically, we'll give it posts that are written for AutoHotkey Basic, and posts that are written for AutoHotkey_L, as well as the categories they belong to.
 
-We'll use "AutoHotkey Basic" and "AutoHotkey_L" as our categories, and a few posts selected randomly from the AutoHotkey forums:
+We'll use "AutoHotkey Basic" and "AutoHotkey_L" as our categories, and a few posts selected randomly from the AutoHotkey forums as our training data:
 
     Data = 
     (
