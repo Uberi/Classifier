@@ -27,15 +27,15 @@ class Classifier
         For Index, Feature In this.Sanitize(Item)
         {
             ;update the feature category counts
-            If !this.Features.HasKey(Feature)
+            If !ObjHasKey(this.Features,Feature)
                 this.Features[Feature] := Object()
-            If !this.Features[Feature].HasKey(Category)
+            If !ObjHasKey(this.Features[Feature],Category)
                 this.Features[Feature][Category] := 0
             this.Features[Feature][Category] ++
         }
 
         ;update the item category counts
-        If !this.Items.HasKey(Category)
+        If !ObjHasKey(this.Items,Category)
             this.Items[Category] := 0
         this.Items[Category] ++
     }
@@ -94,7 +94,7 @@ class Classifier
         AssumedProbability = 0.5 ;the probability a feature is assumed to have if not previously encountered
         AssumedProbabilityWeight = 1.0 ;weight of the assumed probability, as a measure of the number of occurances
 
-        If !this.Features.HasKey(Feature)
+        If !ObjHasKey(this.Features,Feature)
             Return, AssumedProbability
 
         Probability := this.Probability(Feature,Category)
@@ -102,7 +102,7 @@ class Classifier
         Totals := 0
         For Category In this.Items
         {
-            If this.Features[Feature].HasKey(Category)
+            If ObjHasKey(this.Features[Feature],Category)
                 Totals += this.Features[Feature][Category]
         }
         WeightedProbability := ((AssumedProbability * AssumedProbabilityWeight) + (Totals * Probability)) / (AssumedProbabilityWeight + Totals)
@@ -111,14 +111,14 @@ class Classifier
 
     Probability(Feature,Category)
     {
-        If !this.Features[Feature].HasKey(Category)
+        If !ObjHasKey(this.Features[Feature],Category)
             Return, 0
 
         FeatureCategoryProbability := this.Features[Feature][Category] / this.Items[Category]
         FeatureTotalProbability := 0
         For Category, Count In this.Items
         {
-            If this.Features[Feature].HasKey(Category)
+            If ObjHasKey(this.Features[Feature],Category)
                 FeatureTotalProbability += this.Features[Feature][Category] / Count
         }
         Return, FeatureCategoryProbability / FeatureTotalProbability
